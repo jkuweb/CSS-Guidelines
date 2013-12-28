@@ -26,7 +26,7 @@ y organizar CSS.
 
 ##Contenido
 
-* [Anatomía de un documento CSS](#Anatomía-de-un-documento-CSS)
+* [Anatomía de un documento CSS](#Anatomia-de-un-documento-CSS)
   * [General](#general)
   * [Un archivo vs. varios archivos](#un-archivo-vs.-varios-archivos)
   * [Tabla de contenidos](#tabla-de-contenidos)
