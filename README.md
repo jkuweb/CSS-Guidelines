@@ -8,6 +8,7 @@
 * [Chinese](https://github.com/chadluo/CSS-Guidelines/blob/master/README.md)
 * [French](https://github.com/flexbox/CSS-Guidelines/blob/master/README.md)
 * [Japanese](https://github.com/kiwanami/CSS-Guidelines/blob/master/README.ja.md)
+* [Inglés](https://github.com/csswizardry/CSS-Guidelines/blob/master/README.md)
 
 ---
 
