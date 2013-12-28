@@ -1,8 +1,8 @@
-# General CSS notes, advice and guidelines
+# Notas generales de CSS, consejos y directrices
 
 ---
 
-## Translations
+## Traducciones
 
 * [Russian](https://github.com/matmuchrapna/CSS-Guidelines/blob/master/README%20Russian.md)
 * [Chinese](https://github.com/chadluo/CSS-Guidelines/blob/master/README.md)
@@ -11,121 +11,118 @@
 
 ---
 
-In working on large, long running projects with dozens of developers, it is
-important that we all work in a unified way in order to, among other things:
+Trabajando en proyectos extensos con muchos desarrolladores, es importante que 
+trabajemos de una manera unificada para, entre otras cosas:
+* Mantener las hojas de estilos actualizadas
+* Mantener el código limpio y legible
+* Mantener las hojas de estilos escalables
 
-* Keep stylesheets maintainable
-* Keep code transparent and readable
-* Keep stylesheets scalable
+Existen una variedad de técnicas que podemos implementar para cumplir estos objetivos.
 
-There are a variety of techniques we must employ in order to satisfy these
-goals.
+La primera parte de este documento tratará la sintaxis, el formato y la anatomía 
+del CSS, la segunda parte tratará con el enfoque, concepción y postura a la hora de escribir
+y organizar CSS. 
 
-The first part of this document will deal with syntax, formatting and CSS
-anatomy, the second part will deal with approach, mindframe and attitude toward
-writing and architecting CSS. Exciting, huh?
+##Contenido
 
-## Contents
-
-* [CSS document anatomy](#css-document-anatomy)
+* [Anatomía de un documento CSS](#anatomia-css)
   * [General](#general)
-  * [One file vs. many files](#one-file-vs-many-files)
-  * [Table of contents](#table-of-contents)
-  * [Section titles](#section-titles)
-* [Source order](#source-order)
-* [Anatomy of rulesets](#anatomy-of-rulesets)
-* [Naming conventions](#naming-conventions)
-  * [JS hooks](#js-hooks)
-  * [Internationalisation](#internationalisation)
-* [Comments](#comments)
-  * [Comments on steroids](#comments-on-steroids)
-    * [Quasi-qualified selectors](#quasi-qualified-selectors)
-    * [Tagging code](#tagging-code)
-    * [Object/extension pointers](#objectextension-pointers)
-* [Writing CSS](#writing-css)
-* [Building new components](#building-new-components)
+  * [Un archivo vs. varios archivos](#un-archivo-vs-varios)
+  * [Tabla de contenidos](#tabla-contenidos)
+  * [Título de secciones](#titulo-secciones)
+* [Orden del código](#orden-del-codigo)
+* [Anatomía del conjunto de reglas](#anatomia-reglas)
+* [Convenciones para los nombres](#convenciones-nombres)
+  * [JS Hooks](#js-hooks)
+  * [Internacionalización](#internacionalizacion)
+* [Comentarios](#Comentarios)
+  * [Comentrios Avanzados](#comentarios-avanzados)
+    * [Selectores quasi-calificados](#quasi-calificados)
+    * [Código de etiquetas](#codigo-etiquetado)
+    * [Indicadores de Objetos/Extensiones](#indicadores-objetosextensiones)
+* [Escribiendo CSS](#escribiendo-css)
+* [Construyendo nuevos componentes](#construyendo-nuevos-componentes)
 * [OOCSS](#oocss)
 * [Layout](#layout)
-* [Sizing UIs](#sizing-uis)
-  * [Font sizing](#font-sizing)
-* [Shorthand](#shorthand)
-* [IDs](#ids)
-* [Selectors](#selectors)
-  * [Over qualified selectors](#over-qualified-selectors)
-  * [Selector performance](#selector-performance)
-* [CSS selector intent](#css-selector-intent)
-* [`!important`](#important)
-* [Magic numbers and absolutes](#magic-numbers-and-absolutes)
-* [Conditional stylesheets](#conditional-stylesheets)
-* [Debugging](#debugging)
-* [Preprocessors](#preprocessors)
+* [Tamaño UI](#tamano-ui)
+  * [Tamaño de fuente](#tamano-fuente)
+* [Taquigrafía](#taquigrafia)
+* [IDs](#IDs)
+* [Selectores](#selectores)
+  * [Selectores sobre cualificados](#selectores-sobre-cualificados)
+  * [Rendimiento de los selectores](#rendimiento-selectores)
+* [Indentación de selectores CSS](#indentacion-selectores)
+* ['important!'](#important)
+* [Números mágicos y absolutos](#numeros-magicos-absolutos)
+* [Hojas de estilos condicionales](#hojas-condicionales)
+* [Debugging](#debbugging)
+* [Preprocesadores](#preprocesadores)
 
 ---
 
-## CSS Document Anatomy
+## Anatomía de un documento CSS
 
-No matter the document, we must always try and keep a common formatting. This
-means consistent commenting, consistent syntax and consistent naming.
+Sin importar el documento, debemos siempre intentar mantener un formato común.
+Esto quiere decir comentarios consistentes, sintaxis consistente y nombres consistentes.
 
 ### General
 
-Limit your stylesheets to a maximum 80 character width where possible.
-Exceptions may be gradient syntax and URLs in comments. That’s fine, there’s
-nothing we can do about that.
+Limita tu hoja de estilos a un máximo de 80 caracteres de largo a ser posible.
+Las sintaxis de degradados y URL en comentarios pueden ser una excepción. 
+No pasa nada, no podemos hacer nada al respecto.
 
-I prefer four (4) space indents over tabs and write multi-line CSS.
+Prefiero cuatro (4) espacios indentados en tabs y escribir en múltiples líneas el CSS.
 
-### One file vs. many files
+### Un archivo vs. varios archivos
 
-Some people prefer to work with single, large files. This is fine, and by
-sticking to the following guidelines you’ll encounter no problems. Since moving
-to Sass I have started sharding my stylesheets out into lots of tiny includes.
-This too is fine… Whichever method you choose, the following rules and
-guidelines apply. The only notable difference is with regards our table of
-contents and our section titles. Read on for further explanation…
+Algunos prefieren trabajar con un único y gran archivo. Esto está bien, y si
+nos ceñimos a estas directrices no encontraremos problemas. Desde que me he pasado
+a preprocesadores he empezado a dividir mi hoja de estilos en muchos y pequeños includes.
+Esto también es correcto... Cualquiera de los dos métodos que elijas es aplicable a las
+reglas y directrices de este documento. La única diferencia notable se aplica a la tabla de contenidos
+y los títulos de nuestras secciones. Si seguís leyendo lo entenderéis...
 
-### Table of contents
 
-At the top of stylesheets, I maintain a table of contents which will detail the
-sections contained in the document, for example:
 
+### Tabla de contenidos
+
+Al inicio de mi hoja de estilos, mantengo una tabla de contenidos que detalla las 
+secciones mantenidas en el documento, por ejemplo:
     /*------------------------------------*\
-        $CONTENTS
+        $CONTENIDO
     \*------------------------------------*/
     /**
-     * CONTENTS............You’re reading it!
-     * RESET...............Set our reset defaults
-     * FONT-FACE...........Import brand font files
+     * CONTENIDO...........Lo estás leyendo!!
+     * RESET...............Establece los valores iniciales
+     * FONT-FACE...........Importamos fuentes de iconos y font-face
      */
 
-This will tell the next developer(s) exactly what they can expect to find in
-this file. Each item in the table of contents maps directly to a section title.
+Esto dice al siguiente desarrollados(es) que tome el proyecto exactamente que
+puede esperar encontrar en este archivo. Cada item en la tabla de contenido marca
+el título de una sección.
 
-If you are working in one big stylesheet, the corresponding section will also be
-in that file. If you are working across multiple files then each item in the
-table of contents will map to an include which pulls that section in.
+Si trabajas en una hoja de estilos muy grande, la sección correspondiente estará en ese archivo.
+Sin embargo al trabajar con múltiples includes, como en el caso de preprocesadores, cada
+elemento en la tabla de contenidos marcará el include que imprime esa sección.
 
-### Section titles
+### Título de secciones
 
-The table of contents would be of no use unless it had corresponding section
-titles. Denote a section thus:
-
-    /*------------------------------------*\
-        $RESET
-    \*------------------------------------*/
-
-The `$` prefixing the name of the section allows us to run a find ([Cmd|Ctrl]+F)
-for `$[SECTION-NAME]` and **limit our search scope to section titles only**.
-
-If you are working in one large stylesheet, you leave five (5) carriage returns
-between each section, thus:
+La tabla de contenidos sería inútil a menos que tuviera su correspondientes títulos de secciones.
+Denotad una sección de la siguiente manera:
 
     /*------------------------------------*\
         $RESET
     \*------------------------------------*/
-    [Our
+
+Asignar el prefijo '$' al nombre de la sección nos permite efectuar una búsqueda ([Cmd|Ctrl]+F) por '$NOMBRE-SECCIÓN' y **limitar esa búsqueda a los títulos de sección solo**.
+
+Si trabajas con hojas de estilo muy grandes, deja cinco (5) saltos de línea entre cada sección, así:
+    /*------------------------------------*\
+        $RESET
+    \*------------------------------------*/
+    [Estilos del
     reset
-    styles]
+    del CSS]
 
 
 
@@ -135,50 +132,47 @@ between each section, thus:
         $FONT-FACE
     \*------------------------------------*/
 
-This large chunk of whitespace is quickly noticeable when scrolling quickly
-through larger files.
+Este amplio bloque en blanco permite ubicar las secciones cuando se hace un rápido scroll por documentos muy extensos.
 
-If you are working across multiple, included stylesheets, start each of those
-files with a section title and there is no need for any carriage returns.
+Si estás trabajando en múltiples hojas de estilo, incluidas, empieza cada una de esas hojas con el título de la sección y no hay necesidad de saltos de línea o líneas en blanco.
 
-## Source order
 
-Try and write stylesheets in specificity order. This ensures that you take full
-advantage of inheritance and CSS’ first <i>C</i>; the cascade.
+## Orden del Código
 
-A well ordered stylesheet will be ordered something like this:
+Intenta escribir las hojas de estilo en un orden específico. Esto garantiza que aproveches al máximo la herencia y la primera <i>C</i> de CSS: La cascada.
 
-1. **Reset** – ground zero.
-2. **Elements** – unclassed `h1`, unclassed `ul` etc.
-3. **Objects and abstractions** — generic, underlying design patterns.
-4. **Components** – full components constructed from objects and their
-   extensions.
-5. **Style trumps** – error states etc.
+Un correcto orden en la hoja de estilo sería algo como esto:
 
-This means that—as you go down the document—each section builds upon and
-inherits sensibly from the previous one(s). There should be less undoing of
-styles, less specificity problems and all-round better architected stylesheets.
+1. **Reset** – zona zero.
+2. **Elementos** – `h1` sin clase, `ul` sin clase etc.
+3. **Objetos y abstracciones** — Patrones de diseño genéricos y subyacentes.
+4. **Componentes** – Componentes construídos a partir de objetos y sus extensiones.
+5. **Texturas** – Estados de error, info, etc...
 
-For further reading I cannot recommend Jonathan Snook’s
-[SMACSS](http://smacss.com) highly enough.
+Esto implica que mientras vamos bajando cada una de las secciones del documento se construye y basa su herencia en la anterior. Deberíamos deshacer menos estilos, menos problemas en especificar estilos y una mejor arquitectura global de estilos.
 
-## Anatomy of rulesets
+Como lectura complementaria no podría recomendar lo suficiente el libro de Jonathan Snook [SMACSS](http://smacss.com).
+
+
+## Anatomía del conjunto de reglas
 
     [selector]{
-        [property]:[value];
-        [<- Declaration ->]
+        [propiedad]:[valor];
+        [<- Declaración ->]
     }
 
-I have a number of standards when structuring rulesets.
 
-* Use hyphen delimited class names (except for BEM notation,
-  [see below](#naming-conventions))
-* 4 space indented
-* Multi-line
-* Declarations in relevance (NOT alphabetical) order
-* Indent vendor prefixed declarations so that their values are aligned
-* Indent our rulesets to mirror the DOM
-* Always include the final semi-colon in a ruleset
+Tengo un gran número de estándares cuando estructuro un conjunto de reglas
+
+* Usar un guión que delimite los nombres de las clases (excepto para notaciones BEM [ver abajo](#naming-conventions))
+* 4 espacios de indentación.
+* Multilínea
+* Declaración en orden de relevancia (NO orden alfabético)
+* Indentar los valores con prefijos de navegador, así sus valores quedan alineados.
+* Indentar nuestras reglas para que asemeje la estructura del DOM
+* Siempre incluir el punto y coma final en una declaración.
+
+Un ejemplo corto:
 
 A brief example:
 
@@ -199,17 +193,11 @@ A brief example:
             margin-left: -10px;
             padding:0.25em;
         }
+Aquí podemos ver que '.widget-heading' debe ser un hijo de '.widget' ya que tenemos indentado '.widget-heading' un nivel más que '.widget'. Esta información es muy útil para los desarrolladores que ahora pueden hacerse una idea del conjunto con tan solo echar un corto vistazo a las indexaciones de nuestras reglas de estilos.
 
-Here we can see that `.widget-heading` must be a child of `.widget` as we have
-indented the `.widget-heading` ruleset one level deeper than `.widget`. This is
-useful information to developers that can now be gleaned just by a glance at the
-indentation of our rulesets.
+También podemos ver que las declaraciones de '.widget-heading' están declaradas por orden de relevancia; '.widget-heading' debe ser un elemento de texto y podemos empezar con nuestras reglas de texto, seguidas por todo lo demás.
 
-We can also see that `.widget-heading`’s declarations are ordered by their
-relevance; `.widget-heading` must be a textual element so we begin with our
-text rules, followed by everything else.
-
-One exception to our multi-line rule might be in cases of the following:
+Una excepción a nuestra regla multi-línea sería en el siguiente caso:
 
     .t10    { width:10% }
     .t20    { width:20% }
@@ -225,137 +213,104 @@ One exception to our multi-line rule might be in cases of the following:
     .t80    { width:80% }
     .t90    { width:90% }
 
-In this example (from [inuit.css’s table grid system](https://github.com/csswizardry/inuit.css/blob/master/inuit.css/partials/base/_tables.scss#L88))
-it makes more sense to single-line our CSS.
+En este ejemplo (del [sistema de grids de inuit.css](https://github.com/csswizardry/inuit.css/blob/master/inuit.css/partials/base/_tables.scss#L88)) tiene más sentido dejar nuestro CSS en una sola línea.
 
-## Naming conventions
+## Convenciones para los nombres
+Mayormente utilizo clases delimitadas por guiones (Ej: '.foo-bar' y no '.foo_bar' ni '.foobar'), sin embargo, en ciertos casos uso notaciones BEM (Block Element, Modifier - elemento en bloque, modificador).
 
-For the most part I simply use hyphen delimited classes (e.g. `.foo-bar`, not
-`.foo_bar` or `.fooBar`), however in certain circumstances I use BEM (Block,
-Element, Modifier) notation.
+<abbr title="Block, Element, Modifier">BEM</abbr> es una metodología para nombrar y clasificar selectores CSS de manera que los hacemos más estrictos, transparentes e informativos.
 
-<abbr title="Block, Element, Modifier">BEM</abbr> is a methodology for naming
-and classifying CSS selectors in a way to make them a lot more strict,
-transparent and informative.
+La convención de nombre sigue este patrón:
 
-The naming convention follows this pattern:
+    .bloque{}
+    .bloque__elemento{}
+    .bloque--modificador{}
 
-    .block{}
-    .block__element{}
-    .block--modifier{}
+* '.bloque' representa el primer nivel de una abstracción o componente.
+* '.bloque__element' representa un descendente de '.bloque' que se ayuda de '.bloque' como un conjunto.
+* '.bloque--modificador' representa un estado diferente de '.bloque'.
 
-* `.block` represents the higher level of an abstraction or component.
-* `.block__element` represents a descendent of `.block` that helps form `.block`
-  as a whole.
-* `.block--modifier` represents a different state or version of `.block`.
+Una **analogía** del funcionamiento de las clases BEM sería:
 
-An **analogy** of how BEM classes work might be:
+    .persona{}
+    .persona--mujer{}
+        .persona__mano{}
+        .persona__mano--izquierda{}
+        .persona__mano--derecha{}
 
-    .person{}
-    .person--woman{}
-        .person__hand{}
-        .person__hand--left{}
-        .person__hand--right{}
+Aquí vemos como el objeto básico que estamos describiendo es una persona, y que un tipo diferente de persona podría ser una mujer. También podemos ver que las personas tienen manos; son sub-partes de las personas, y que hay variaciones, como izquierda y derecha.
 
-Here we can see that the basic object we’re describing is a person, and that a
-different type of person might be a woman. We can also see that people have
-hands; these are sub-parts of people, and there are different variations,
-like left and right.
+Ahora podemos nombrar nuestros selectores basado en sus objetos base y podemos también comunicar que función tiene el selector; es un sub-componente ('__') o una variación ('--')?
 
-We can now namespace our selectors based on their base objects and we can also
-communicate what job the selector does; is it a sub-component (`__`) or a
-variation (`--`)?
+Entonces, '.page-wrapper' es un selector aislado; no forma parte de una abstracción o componente y como tal está nombrado correctamente. '.widget-heading' _está_ relacionado a un componente y es un hijo de '.widget', así que deberíamos renombrar esta clase a '.widget__heading'
 
-So, `.page-wrapper` is a standalone selector; it doesn’t form part of an
-abstraction or a component and as such it named correctly. `.widget-heading`,
-however, _is_ related to a component; it is a child of the `.widget` construct
-so we would rename this class `.widget__heading`.
 
-BEM looks a little uglier, and is a lot more verbose, but it grants us a lot of
-power in that we can glean the functions and relationships of elements from
-their classes alone. Also, BEM syntax will typically compress (gzip) very well
-as compression favours/works well with repetition.
+BEM se ve un poco feo, y es mucho más verbal, pero nos garantiza   poder espigar las funciones y relaciones de los elementos con sus componentes. BEM a su vez comprime (gzip) muy bien y por ello el repetirlos nos viene bien en documentos comprimidos.
 
-Regardless of whether you need to use BEM or not, always ensure classes are
-sensibly named; keep them as short as possible but as long as necessary. Ensure
-any objects or abstractions are very vaguely named (e.g. `.ui-list`, `.media`)
-to allow for greater reuse. Extensions of objects should be much more explicitly
-named (e.g. `.user-avatar-link`). Don’t worry about the amount or length of
-classes; gzip will compress well written code _incredibly_ well.
+Independientemente que uses BEM o no, siempre asegúrate que las clases son nombradas muy claramente; mantenías tan corto como sea posible pero tan largas como sea necesario. Asegúrate que cualquier objeto o abstracción tienen nombres vagos (Ej: '.ui-list', '.media') para permitir su reutilización siempre que sea posible. Las extensiones de objetos deben ser nombradas mucho más explícitamente (Ej: '.user-avatar-link). No te preocupes por la longitud o cantidad de clases; gzip comprimirá todo el código bien escrito _increíblemente_ bien.
 
-### Classes in HTML
 
-In a bid to make things easier to read, separate classes in your HTML with two
-(2) spaces, thus:
+### Clases en HTML
+
+Haz las cosas fáciles de leer, separa tus clases en HTML con dos (2) espacios en blanco:
 
     <div class="foo--bar  bar__baz">
 
-This increased whitespace should hopefully allow for easier spotting and reading
-of multiple classes.
+Este espacio en blanco incrementado permitirá ubicar con mayor facilidad y mejorar la lectura de múltiples clases.
 
 ### JS hooks
 
-**Never use a CSS _styling_ class as a JavaScript hook.** Attaching JS behaviour
-to a styling class means that we can never have one without the other.
+**Nunca uses una clase de CSS _de estilos_ como un hook de JS.** 
+Adjuntar comportamientos de JS a clases de estilo quiere decir que nunca podremos tener una sin la otra
 
-If you need to bind to some markup use a JS specific CSS class. This is simply a
-class namespaced with `.js-`, e.g. `.js-toggle`, `.js-drag-and-drop`. This means
-that we can attach both JS and CSS to classes in our markup but there will never
-be any troublesome overlap.
+Si necesitas enlazar a alguna etiqueta usa una clase específica de JavaScript,. Simplemente es una clase que empiece por '.JS-' , Ej: '.js-toggle', '.js-drag-and-drop' y de esta manera podemos agregar ambas clases, JS y CSS, a nuestra etiqueta pero nunca se sobrepondrán una a la otra.
 
     <th class="is-sortable  js-is-sortable">
     </th>
 
-The above markup holds two classes; one to which you can attach some styling for
-sortable table columns and another which allows you to add the sorting
-functionality.
+El marcado anterior contiene dos clases; una a la cual podemos adjuntar estilos y otra que permite agregar la funcionalidad.
 
-### Internationalisation
+### Internacionalización
 
-Despite being a British developer—and spending all my life writing <i>colour</i>
-instead of <i>color</i>—I feel that, for the sake of consistency, it is better
-to always use US-English in CSS. CSS, as with most (if not all) other languages,
-is written in US-English, so to mix syntax like `color:red;` with classes like
-`.colour-picker{}` lacks consistency. I have previously suggested and advocated
-writing bilingual classes, for example:
+A pesar de ser británico - y escribir toda mi vida <i>colour</i> en vez de <i>color</i> - creo que, por el bien de la consistencia, es mejor usar siempre Inglés Americano en CSS. CSS, así como la mayoría (si no todos) de otros lenguajes, está escrito en Inglés Americano, con lo cual mezclar sintaxis como 'color:red' con clases como '.colour-picker {}' carece de consistencia.
+Anteriormente he sugerido y defendido escribir clases bilingües, como por ejemplo:
 
     .color-picker,
     .colour-picker{
     }
 
-However, having recently worked on a very large Sass project where there were
-dozens of colour variables (e.g. `$brand-color`, `$highlight-color` etc.),
-maintaining two versions of each variable soon became tiresome. It also means
-twice as much work with things like find and replace.
+Sin embargo, tras haber trabajado recientemente en un proyecto bastante largo en Sass donde habían docenas de variables de colores (Ej: '$brand-color', '$highlight-color' etc.) mantener dos versiones de cada variable se volvió agotador. Esto también quiere decir un doble trabajo con funciones como buscar y reemplazar.
 
-In the interests of consistency, always name classes and variables in the locale
-of the language you are working with.
+En beneficio de la consistencia, siempre nombra clases y variables en el lenguaje en el que estás trabajando.
 
-## Comments
+***Nota del traductor***
+* En mi opinión siempre usaría inglés: nada impide a desarrolladores de otros idiomas continuar nuestro trabajo y necesitamos una consistencia.
 
-I use a docBlock-esque commenting style which I limit to 80 characters in length:
+## Comentarios
+
+Uso comentarios estilo docBlock-esque a los que limito a 80 caracteres de longitud:
 
     /**
-     * This is a docBlock style comment
+     * Esto es un comentario estilo docBlock
      *
-     * This is a longer description of the comment, describing the code in more
-     * detail. We limit these lines to a maximum of 80 characters in length.
+     * Esta es una descripción más larga del comentario, describiendo el código con más 
+     * detalle. Limitamos estas líneas a 80 caracteres de longitud
      *
-     * We can have markup in the comments, and are encouraged to do so:
+     * Podemos tener etiquetado en el comentario, y de hecho es recomendable:
      *
        <div class=foo>
            <p>Lorem</p>
        </div>
      *
-     * We do not prefix lines of code with an asterisk as to do so would inhibit
-     * copy and paste.
+     * No ponemos un asterisco como prefijo en las líneas de código, ya que inhibiría
+     * copiar y pegar.
+     * 
      */
 
-You should document and comment our code as much as you possibly can, what may
-seem or feel transparent and self explanatory to you may not be to another dev.
-Write a chunk of code then write about it.
+Deberías documentar y comentar tu código tanto como sea posible, lo que puede parecer transparente y que se explica por sí mismo podría no serlo para otro desarrollador.
+Escribe un trozo de código y luego escribe sobre él.
 
-### Comments on steroids
+### Comentarios avanzados
 
 There are a number of more advanced techniques you can employ with regards
 comments, namely:
@@ -364,41 +319,30 @@ comments, namely:
 * Tagging code
 * Object/extension pointers
 
-#### Quasi-qualified selectors
+#### Selectores Cuasi-calificados
 
-You should never qualify your selectors; that is to say, we should never write
-`ul.nav{}` if you can just have `.nav`. Qualifying selectors decreases selector
-performance, inhibits the potential for reusing a class on a different type of
-element and it increases the selector’s specificity. These are all things that
-should be avoided at all costs.
+Nunca deberías clasificar tu selector, esto es, nunca debemos escribir 'ul.na{}' si podemos tener '.nav{}'. Calificar selectores disminuye el rendimiento del selector, inhibe la posibilidad de rehusar una clase en un elemento diferente y disminuye su adecuación. Estas son cosas que debemos evitar a todo coste.
 
-However, sometimes it is useful to communicate to the next developer(s) where
-you intend a class to be used. Let’s take `.product-page` for example; this
-class sounds as though it would be used on a high-level container, perhaps the
-`html` or `body` element, but with `.product-page` alone it is impossible to
-tell.
+Sin embargo, a veces es útil comunicar al siguiente desarrollador(es) dónde pretendes usar esa clase. Tomemos '.product-page' por ejemplo; esta clase suena como si debiera ser usada en un contenedor principal, quizás el elemento 'body' o 'html' pero es difícil de decir de verdad dónde se debe usar.
 
-By quasi-qualifying this selector (i.e. commenting out the leading type
-selector) we can communicate where we wish to have this class applied, thus:
+Cuasi-calificarndo este selector (Ej: Comentando el selector principal) podemos comunicar dónde queremos que se use esta clase, algo como:
 
-    /*html*/.product-page{}
+   /*html*/.product-page{}
 
-We can now see exactly where to apply this class but with none of the
-specificity or non-reusability drawbacks.
+Ahora podemos ver dónde usar esta clase exactamente pero sin las especificaciones que modifiquen la clase para evitar que sea rehusada.
 
-Other examples might be:
+Otro ejemplo puede ser:
 
     /*ol*/.breadcrumb{}
     /*p*/.intro{}
     /*ul*/.image-thumbs{}
 
-Here we can see where we intend each of these classes to be applied without
-actually ever impacting the specificity of the selectors.
+Se puede ver dónde queremos usar esta clase pero sin que afecte al selector.
 
-#### Tagging code
 
-If you write a new component then leave some tags pertaining to its function in
-a comment above it, for example:
+#### Código de etiquetas
+
+Si escribes un nuevo componente entonces deja algunas etiquetas relativas a su función en un comentario, por ejemplo:
 
     /**
      * ^navigation ^lists
@@ -410,317 +354,210 @@ a comment above it, for example:
      */
     .matrix{}
 
-These tags allow other developers to find snippets of code by searching for
-function; if a developer needs to work with lists they can run a find for
-`^lists` and find the `.nav` and `.matrix` objects (and possibly more).
+Estas etiquetas permiten a otros desarrolladores a encontrar snippets de código buscando por su función; si un desarrollado necesita trabajar con listas, puede ejecutar una búsqueda por '^lists' y encontrar los objetos '.nav' y '.matrix. (y posiblemente más).
 
-#### Object/extension pointers
+#### Indicadores de Objetos/Extensiones
 
-When working in an object oriented manner you will often have two chunks of CSS
-(one being the skeleton (the object) and the other being the skin (the
-extension)) that are very closely related, but that live in very different
-places. In order to establish a concrete link between the object and its
-extension with use <i>object/extension pointers</i>. These are simply comments
-which work thus:
+Cuando trabajamos orientados a objetos encontrarás a menudo dos trozos de código CSS (siendo uno el esqueleto - el objeto - y otro siendo su skin o piel - la extensión -) que están relacionados, pero que habitan en sitios muy diferentes. Para establecer un vínculo entre el objeto y el uso de su extensión están los <i>Indicadores de Objetos/Extensiones</i>. Éstos son simples comentarios que funcionan así:
 
-In your base stylesheet:
+En tu hoja de estilos base:
 
     /**
-     * Extend `.foo` in theme.css
+     * Extiende `.foo` en theme.css
      */
      .foo{}
 
-In your theme stylesheet:
+En tu hoja de tema, skin o layout:
 
     /**
-     * Extends `.foo` in base.css
+     * Extendido de `.foo` en base.css
      */
      .bar{}
 
-Here we have established a concrete relationship between two very separate
-pieces of code.
+Hemos establecido una relación concreta entre dos trozos de código muy separados.
 
 ---
 
-## Writing CSS
+## Escribiendo CSS
 
-The previous section dealt with how we structure and form our CSS; they were
-very quantifiable rules. The next section is a little more theoretical and deals
-with our attitude and approach.
+Las secciones anteriores tratan acerca de la estructura y forma de nuestro CSS; son reglas y normas cuantificables. La siguiente sección es un poco más teórica y trata acerca de nuestra actitud y punto de vista.
 
-## Building new components
+## Construyendo nuevos componentes
 
-When building a new component write markup **before** CSS. This means you can
-visually see which CSS properties are naturally inherited and thus avoid
-reapplying redundant styles.
+Cuando construyamos nuevos componentes escribe el marcado (HTML) **antes** del CSS. Con esto podrás visualizar que propiedades CSS son heredadas y así evitar replicar estilos redundantes.
 
-By writing markup first you can focus on data, content and semantics and then
-apply only the relevant classes and CSS _afterwards_.
+Escribiendo el marcado primero te enfocas en datos, contenido y semántica y _luego_ aplicas sólo las clases relevantes y el CSS.
 
 ## OOCSS
 
-I work in an OOCSS manner; I split components into structure (objects) and
-skin (extensions). As an **analogy** (note, not example) take the following:
+Yo trabajo bajo OOCSS; Divido los componentes en estructura (objetos) y skin (extension). Como **analogía** (No ejemplo) observad lo siguiente:
 
-    .room{}
+    .habitación{}
 
-    .room--kitchen{}
-    .room--bedroom{}
-    .room--bathroom{}
+    .habitación--cocina{}
+    .habitación--cuarto{}
+    .habitación--baño{}
 
-We have several types of room in a house, but they all share similar traits;
-they all have floors, ceilings, walls and doors. We can share this information
-in an abstracted `.room{}` class. However we have specific types of room that
-are different from the others; a kitchen might have a tiled floor and a bedroom
-might have carpets, a bathroom might not have a window but a bedroom most likely
-will, each room likely has different coloured walls. OOCSS teaches us to
-abstract the shared styles out into a base object and then _extend_ this
-information with more specific classes to add the unique treatment(s).
+Tenemos diferentes tipos de habitaciones en una casa, pero todas ellas reciben un trato similar; todas tienen suelo, techo, paredes y puertas. Podemos compartir esta información con una clase abstracta '.habitación{}. Sin embargo, tenemos diferentes tipos de habitación que las difieren de otras; la cocina puede tener un suelo de baldosas y el cierto puede tener alfombra, un baño puede no tener ventana pero es muy probable que un cuarto si la tenga, y cada habitación puede tener las paredes de diferente color. OOCSS (Object Oriented CSS) nos enseña a abstraer los estilos compartidos en un objeto base y luego _extender_ esta información con clases más específicas que añadan estilo(s) único(s).
 
-So, instead of building dozens of unique components, try and spot repeated
-design patterns across them all and abstract them out into reusable classes;
-build these skeletons as base ‘objects’ and then peg classes onto these to
-extend their styling for more unique circumstances.
+Entonces, en vez de construir docenas de componentes únicos, prueba identificar patrones de diseño repetidos y abstráelos dentro de clases reusables; construye esqueletos como 'objetos' base y luego enclavija clases a éstos objetos para extender sus estilos en circunstancias más específicas o únicas.
 
-If you have to build a new component split it into structure and skin; build the
-structure of the component using very generic classes so that we can reuse that
-construct and then use more specific classes to skin it up and add design
-treatments.
+Si tienes que construir nuevos componentes divídelos en estructura y skin; construye la estructura del componente usando clases muy genéricas de manera que se puedan rehusar y añadirle las clases más específicas para estilizar y añadir diseño.
 
 ## Layout
 
-All components you build should be left totally free of widths; they should
-always remain fluid and their widths should be governed by a parent/grid system.
+Todos los componentes que construyas no deben tener anchos (width); deben ser fluidos y su anchura regida por su contenedor o por su grid.
 
-Heights should **never** be be applied to elements. Heights should only be
-applied to things which had dimensions _before_ they entered the site (i.e.
-images and sprites). Never ever set heights on `p`s, `ul`s, `div`s, anything.
-You can often achieve the desired effect with `line-height` which is far more
-flexible.
+**Nunca** se deben aplicar alturas (height) a los elementos. La altura debe ser solo aplicada a los elementos con unas dimensiones dadas _antes_ de introducirse en el layout (Ej: sprites o imágenes). Nunca establezcas altura a 'p', 'ul', 'div', o a cualquier otro elemento. normalmente puedes obtener el efecto deseado con 'line-height' que es de lejos mucho más flexible.
 
-Grid systems should be thought of as shelves. They contain content but are not
-content in themselves. You put up your shelves then fill them with your stuff.
-By setting up our grids separately to our components you can move components
-around a lot more easily than if they had dimensions applied to them; this makes
-our front-ends a lot more adaptable and quick to work with.
+Los sistemas de grids deben ser pensados como estanterías. Tienen contenido pero no son contenido _per se_. Tu montas las estanterías y luego las llenas con tus cosas. Configurar nuestras grids separada de nuestros componentes nos permite mover componentes mucho más fácil que si tienen dimensiones configuradas; esto hace nuestro front-end mucho más adaptable y nos permite trabajarlo más rápido.
 
-You should never apply any styles to a grid item, they are for layout purposes
-only. Apply styling to content _inside_ a grid item. Never, under _any_
-circumstances, apply box-model properties to a grid item.
+Nunca deberías aplicar estilos a un elemento del sistema de grid, son para efectos de disposición únicamente. Aplica estilos al contenido _dentro_ del elemento del grid. Nunca, bajo _ninguna_ circunstancia, debemos aplicar propiedades al modelo de caja de un elemento del grid.
 
-## Sizing UIs
 
-I use a combination of methods for sizing UIs. Percentages, pixels, ems, rems
-and nothing at all.
+## Medidas
 
-Grid systems should, ideally, be set in percentages. Because I use grid systems
-to govern widths of columns and pages, I can leave components totally free of
-any dimensions (as discussed above).
+Uso una combinación de métodos para los tamaños. Porcentajes, pixels, ems, rems y nada en absoluto.
 
-Font sizes I set in rems with a pixel fallback. This gives the accessibility
-benefits of ems with the confidence of pixels. Here is a handy Sass mixin to
-work out a rem and pixel fallback for you (assuming you set your base font
-size in a variable somewhere):
+El sistema de grids debe, idealmente, estar dado en porcentajes. Ya que uso el grid para controlar el ancho de columnas y páginas, puedo dejar componentes sin dimensiones dadas (tal como se expuso anteriormente).
+
+Los tamaños de fuentes deben darse en rems con fallback en pixels. Así se aprovechan los beneficios de accesibilidad de los rems con la robustez de los pixels. Aquí os dejo un mitin de Sass para trabajar con rems y dejar un fallback en pixels (asume que has declarado una variable para el tamaño de fuente en algún lado):
 
     @mixin font-size($font-size){
         font-size:$font-size +px;
         font-size:$font-size / $base-font-size +rem;
     }
+Y en Less:
 
-I only use pixels for items whose dimensions were defined before the came into
-the site. This includes things like images and sprites whose dimensions are
-inherently set absolutely in pixels.
+		.font-size(@font-size: 16) {
+        @rem: (@font-size / 10);
+        font-size: @font-size * 1px;
+        font-size: ~"@{rem}rem";
+		}
 
-### Font sizing
+Sólo uso pixels para elementos cuyas dimensiones están previamente definidas antes de entrar en el sitio. Esto incluye cosas como imágenes y sprites cuyas dimensiones están heredadas y configuradas en pixels.
 
-I define a series of classes akin to a grid system for sizing fonts. These
-classes can be used to style type in a double stranded heading hierarchy. For a
-full explanation of how this works please refer to my article
-[Pragmatic, practical font-sizing in CSS](http://csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css)
+### Tamaños de fuentes
+
+Yo defino una serie de clases parecidas a un sistema de grids para los tamaños de fuentes. Estas clases pueden ser usadas para dar estilos a una tipografía en un doble encabezado. Para una completa explicación sobre como funciona, leer mi artículo [Pragmatic, practical font-sizing in CSS](http://csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css)
 
 ## Shorthand
 
-**Shorthand CSS needs to be used with caution.**
+**Los shorthand de CSS deben usarse con precaución.**
 
-It might be tempting to use declarations like `background:red;` but in doing so
-what you are actually saying is ‘I want no image to scroll, aligned top-left,
-repeating X and Y, and a background colour of red’. Nine times out of ten this
-won’t cause any issues but that one time it does is annoying enough to warrant
-not using such shorthand. Instead use `background-color:red;`.
+Es tentador usar declaraciones como 'background:red;' pero haciéndolo lo que de verdad dices es 'no quiero que la imagen haga scroll, que se alinee arriba a la izquierda, que se repita en el eje x y en el eje Y, y con un fondo rojo'. Nueve veces de 10 esto no causará ningún problema pero esa sola vez que lo causa es suficiente para evitar el uso de shorthands. En vez de ello, usa 'background-color:red;'.
 
-Similarly, declarations like `margin:0;` are nice and short, but
-**be explicit**. If you actually only really want to affect the margin on
-the bottom of an element then it is more appropriate to use `margin-bottom:0;`.
+Similarmente, declaraciones como 'margin:0;' están bien y son cortas, pero **sé explícito**. Si lo que quieres de verdad afectar es solo el margen en el inferior de un elemento entonces es más apropiado usar 'margin-bottom:0;'.
 
-Be explicit in which properties you set and take care to not inadvertently unset
-others with shorthand. E.g. if you only want to remove the bottom margin on an
-element then there is no sense in setting all margins to zero with `margin:0;`.
+Sé explícito en cual propiedad estableces y ten cuidado de no desconfigurar otras por error al usar un shorthand. Ej: Si quieres solo eliminar el margen inferior de un elemento no tiene sentido establecer todos los márgenes a 0 con 'margin:0;'.
 
-Shorthand is good, but easily misused.
+Los shorthands son buenos, pero pueden hacer caer en malas prácticas fácilmente.
 
-## IDs
+## ID
 
-A quick note on IDs in CSS before we dive into selectors in general.
+Una pequeña anotación acerca de IDs en CSS antes de entrar a ver selectores en general.
 
-**NEVER use IDs in CSS.**
+**NUNCA uséis IDs en CSS.**
 
-They can be used in your markup for JS and fragment identifiers but use only
-classes for styling. You don’t want to see a single ID in any stylesheets!
+Pueden ser usados en tu marcado para referencias de JS pero usad  sólo clases para estilos. No queréis ver una sola ID en ninguna hoja de estilos!
 
-Classes come with the benefit of being reusable (even if we don’t want to, we
-can) and they have a nice, low specificity. Specificity is one of the quickest
-ways to run into difficulties in projects and keeping it low at all times is
-imperative. An ID is **255** times more specific than a class, so never ever use
-them in CSS _ever_.
+Las clases vienen con el beneficio de ser reusables (aún si no queremos, podemos) y tienen un buen y bajo especificado. El especificado es una de las formas más rápidas de afrontar dificultades en proyectos y mantenerlo bajo en todo momento, es imperativo. Una ID es **255** veces más específico que una clase, por ello _nunca_ los uses en CSS.
 
-## Selectors
+## Selectores
 
-Keep selectors short, efficient and portable.
+Mantén los selectores cortos, eficientes y portables.
 
-Heavily location-based selectors are bad for a number of reasons. For example,
-take `.sidebar h3 span{}`. This selector is too location-based and thus we
-cannot move that `span` outside of a `h3` outside of `.sidebar` and maintain
-styling.
+Selectores basados en su posición son malos por una variedad de razones. Por ejemplo, tomemos '.sidebar h3 span{}'. Este selector está basado en la posición y por ello no podemos mover ese 'span' fuera de un 'h3' fuera de un '.sidebar' y mantener el estilo.
 
-Selectors which are too long also introduce performance issues; the more checks
-in a selector (e.g. `.sidebar h3 span` has three checks, `.content ul p a` has
-four), the more work the browser has to do.
+Los selectores que son muy largos también introducen problemas de optimización; 
+Selectors which are too long also introduce performance issues; Mientras más verificaciones hay en un selector (Ej: '.sidebar h3 span' tiene tres verificaciones, '.content ul p a' tiene cuatro), más trabajo tiene el navegador.
 
-Make sure styles aren’t dependent on location where possible, and make sure
-selectors are nice and short.
+Siempre que sea posible nos aseguraremos que los estilos no dependan de la posición en el CSS, y nos aseguraremos que los selectores son buenos y cortos.
 
-Selectors as a whole should be kept short (e.g. one class deep) but the class
-names themselves should be as long as they need to be. A class of `.user-avatar`
-is far nicer than `.usr-avt`.
+Los selectores en general deben mantenerse cortos (Ej: una clase de profundidad) pero los nombres de las clases en sí mismas deben ser tan largas como lo necesiten. Una clase de '.user-avatar' siempre es mejor que '.usr-avt'
 
-**Remember:** classes are neither semantic or insemantic; they are sensible or
-insensible! Stop stressing about ‘semantic’ class names and pick something
-sensible and futureproof.
+**Recordad:** Las clases no son semánticas o dejan de serlo; ellas son sensibles o insensibles! Dejad de preocuparse por la 'semántica' de los nombres de las clases y elige algo sensible y previsora.
 
-### Over-qualified selectors
+### Selectores sobre-calificados
 
-As discussed above, qualified selectors are bad news.
+Como ya discutimos anteriormente, selectores calificados son malas noticias.
 
-An over-qualified selector is one like `div.promo`. You could probably get the
-same effect from just using `.promo`. Of course sometimes you will _want_ to
-qualify a class with an element (e.g. if you have a generic `.error` class that
-needs to look different when applied to different elements (e.g.
-`.error{ color:red; }` `div.error{ padding:14px; }`)), but generally avoid it
-where possible.
+Un elector sobre calificado es como 'div.promo'. Probablemente podrías obtener el mismo resultado usando solo '.promo'. Claro, algunas veces querrás calificar una clase con un elemento (Ej: si tienes una clase genérica '.error' que debe verse diferente cuando se aplica a un elemento diferente (Ej: '.error{color:red;}' 'div.error{padding:14px;}')), pero generalmente se evita siempre que sea posible.
 
-Another example of an over-qualified selector might be `ul.nav li a{}`. As
-above, we can instantly drop the `ul` and because we know `.nav` is a list, we
-therefore know that any `a` _must_ be in an `li`, so we can get `ul.nav li a{}`
-down to just `.nav a{}`.
+Otro ejemplo de un selector sobre calificado sería 'ul.nav li a {}'. Al igual que arriba, podemos eliminar instantáneamente el 'ul' y ya que sabemos que '.nav' es una lista, podemos saber que cualquier 'a' _debe_ ir en un 'li', así que podemos cambiar 'ul.nav li a{}' por '.nav a{}'.
 
-### Selector performance
 
-Whilst it is true that browsers will only ever keep getting faster at rendering
-CSS, efficiency is something you could do to keep an eye on. Short, unnested
-selectors, not using the universal (`*{}`) selector as the key selector, and
-avoiding more complex CSS3 selectors should help circumvent these problems.
+### Rendimiento de los selectores
 
-## CSS selector intent
+Aunque es verdad que los navegadores son cada vez más rápidos renderizando CSS, la eficiencia es algo en lo que siempre quieres tener un ojo puesto. Selectores cortos, no anidados, sin usar el selector universal ('*{}') y evitando selectores complejos de CSS3 ayudarán a evitar problemas de rendimiento.
 
-Instead of using selectors to drill down the DOM to an element, it is often best
-to put a class on the element you explicitly want to style. Let’s take a
-specific example with a selector like `.header ul{}`…
 
-Let’s imagine that `ul` is indeed the main navigation for our website. It lives
-in the header as you might expect and is currently the only `ul` in there;
-`.header ul{}` will work, but it’s not ideal or advisable. It’s not very future
-proof and certainly not explicit enough. As soon as we add another `ul` to that
-header it will adopt the styling of our main nav and the the chances are it
-won’t want to. This means we either have to refactor a lot of code _or_ undo a
-lot of styling on subsequent `ul`s in that `.header` to remove the effects of
-the far reaching selector.
+## Propósito de los selectores CSS
 
-Your selector’s intent must match that of your reason for styling something;
-ask yourself **‘am I selecting this because it’s a `ul` inside of `.header` or
-because it is my site’s main nav?’**. The answer to this will determine your
-selector.
+En vez de utilizar selectores para perforar el DOM hasta un elemento, muchas veces es mejor poner una clase en el elemento que queremos estilizar o modificar. Tomemos un ejemplo en concreto con un selector como '.header ul{}'...
 
-Make sure your key selector is never an element/type selector or
-object/abstraction class. You never really want to see selectors like
-`.sidebar ul{}` or `.footer .media{}` in our theme stylesheets.
+Imaginemos que 'ul' es la navegación principal de nuestro sitio. Habita en el header como es de esperar y actualmente es el único 'ul' ahí.
+'.header ul' funcionará, pero no es ideal o aconsejable. No es muy seguro en cambios futuros y ciertamente no es lo suficiente explícito. Apenas agreguemos otro 'ul' a ese encabezado adoptará el estilo de nuestra navegación principal y lo más probable es que no queramos eso. Esto quiere decir que tendríamos que reestructurar código _o_ deshacer mucho estilo en los subsecuentes 'ul' dentro de ese '.header'.
 
-Be explicit; target the element you want to affect, not its parent. Never assume
-that markup won’t change. **Write selectors that target what you want, not what
-happens to be there already.**
+El propósito de tu selector debe coincidir con el motivo de estilizar algo; pregúntate a ti mismo **'Estoy seleccionando esto porque es un 'ul' dentro de '.header' o porque es la navegación principal de mi sitio?'**. La respuesta a esto determinará tu selector.
 
-For a full write up please see my article
+
+Asegúrate que tu selector clave nunca es una clase tipo/elemento u objeto/abstracción. No quieres ver clases como '.sidebar ul{}' o '.footer .media{}' en nuestros estilos.
+
+Sé explícito; selecciona el elemento al que quieres afectar, no su padre o contenedor. Nunca asumas que el marcado no va a cambiar. **Escribe selectores que hagan objetivo a lo que quieres, no a lo ya está ahí.**
+
+Para una lectura más profunda en el propósito de los selectores: 
 [Shoot to kill; CSS selector intent](http://csswizardry.com/2012/07/shoot-to-kill-css-selector-intent/)
 
-## `!important`
+## '!important'
 
-It is okay to use `!important` on helper classes only. To add `!important`
-preemptively is fine, e.g. `.error{ color:red!important }`, as you know you will
-**always** want this rule to take precedence.
+Está bien utilizar '!important' sólo en clases _helper_. Añadir '!important' preventivamente es correcto, Ej: '.error{} color:red!important;}', como ya sabrás **siempre** querrás que esta regla tenga prioridad.
 
-Using `!important` reactively, e.g. to get yourself out of nasty specificity
-situations, is not advised. Rework your CSS and try to combat these issues by
-refactoring your selectors. Keeping your selectors short and avoiding IDs will
-help out here massively.
+Usar '!important' sensiblemente, Ej: para salir de malas situaciones de especificación, no es recomendado. Rehaz tu CC e intenta combatir estos problemas reconstruyendo tus selectores. Mantener tus selectores cortos y evitando IDs ayudará enormemente.  
 
-## Magic numbers and absolutes
+## Números mágicos y absolutos
 
-A magic number is a number which is used because ‘it just works’. These are bad
-because they rarely work for any real reason and are not usually very
-futureproof or flexible/forgiving. They tend to fix symptoms and not problems.
+Un número mágico es un número usado porque 'funciona'. Son malos porque raramente funcionan de verdad y no son muy seguros o flexibles/indulgentes. Tienden a solucionar síntomas y no problemas.
 
-For example, using `.dropdown-nav li:hover ul{ top:37px; }` to move a dropdown
-to the bottom of the nav on hover is bad, as 37px is a magic number. 37px only
-works here because in this particular scenario the `.dropdown-nav` happens to be
-37px tall.
+Por ejemplo, usar '.dropdown-nav li:hover ul{ top:37px; }' para mover un desplegable abajo de la navegación en _hover_ está mal, ya que 37px es un número mágico. 37px sólo funciona aquí porque en este escenario en particular el '.dropdown-nav' tiene 37px de alto.
 
-Instead you should use `.dropdown-nav li:hover ul{ top:100%; }` which means no
-matter how tall the `.dropdown-nav` gets, the dropdown will always sit 100% from
-the top.
+En vez deberías usar '.dropdown-nav li:hover ul{ top:100%; }' que quiere decir que no importa el alto de '.dropdown.nav', el desplegable siempre se colocará a 100% del borde superior.
 
-Every time you hard code a number think twice; if you can avoid it by using
-keywords or ‘aliases’ (i.e. `top:100%` to mean ‘all the way from the top’)
-or&mdash;even better&mdash;no measurements at all then you probably should.
+Piensa cada vez que escribes un número para que _encaje_ en el layout; si puedes evitarlo usando 'aliases' (Ej: 'top:100%' para indicar 'todo a partir del borde superior') o &mdash;aún mejor&mdash; sin medida alguna.
 
-Every hard-coded measurement you set is a commitment you might not necessarily
-want to keep.
+Cada 
 
-## Conditional stylesheets
+Escribir medidas para que _encajen_ en el layout es un compromiso que no necesariamente querrás mantener.
 
-IE stylesheets can, by and large, be totally avoided. The only time an IE
-stylesheet may be required is to circumvent blatant lack of support (e.g. PNG
-fixes).
+## Hojas de estilos condicionales
 
-As a general rule, all layout and box-model rules can and _will_ work without an
-IE stylesheet if you refactor and rework your CSS. This means you never want to
-see `<!--[if IE 7]> element{ margin-left:-9px; } < ![endif]-->` or other such
-CSS that is clearly using arbitrary styling to just ‘make stuff work’.
+Las hojas de estilos para IE pueden, sobradamente, ser evitadas en su totalidad. La única vez que puede necesitarse una hoja de estilo alternativa para IE es para eludir falta de soporte (Ej: ajustes para PNG).
 
-## Debugging
+Como regla general, todas las reglas de tu layout y modelo de cajas (box-model) pueden funcionar y _funcionarán_ sin una hoja de estilos para IE si reestructuras y trabajas tu CSS. Esto quiere decir que no queremos ver '<!--[if IE 7]> elemento{ margin-left:-9px; } < ![endif]-->' u otra parecida que claramente tiene un uso arbitrario apea hacer que 'las cosas funcionen'.
 
-If you run into a CSS problem **take code away before you start adding more** in
-a bid to fix it. The problem exists in CSS that is already written, more CSS
-isn’t the right answer!
+## Depuración
 
-Delete chunks of markup and CSS until your problem goes away, then you can
-determine which part of the code the problem lies in.
+Si te encuentras con un problema de CSS **quita código antes de empezar a agregar más** en un intento por solucionarlo. El problema existe en el CSS ya escrito, más CSS no es la solución adecuada.
 
-It can be tempting to put an `overflow:hidden;` on something to hide the effects
-of a layout quirk, but overflow was probably never the problem; **fix the
-problem, not its symptoms.**
 
-## Preprocessors
+Borra trozos de CSS y marcado hasta que el problema desaparezca, así puedes determinar en que parte o línea reside el problema.
 
-Sass is my preprocessor of choice. **Use it wisely.** Use Sass to make your CSS
-more powerful but avoid nesting like the plague! Nest only when it would
-actually be necessary in vanilla CSS, e.g.
+Puede ser tentador poner un 'overflow:hidden;' en un elemento para ocultar los efectos de un error en el layout, pero overflow nunca fue probablemente el problema. **Arregla el problema, no sus síntomas.**
+
+## Preprocesadores
+
+### **Nota del traductor:** Harry Roberts (@csswizardry), autor de este texto, usa Sass, le idea e incluso las técnicas que se exponen a continuación son perfectamente adaptables a cualquier otro preprocesador //
+
+Sass es mi preprocesador elegido. **Usadlo con cuidado.** Usa preprocesadores para mejorar la creación de CSS pero evita animaciones exageradas! Anida sólo cuando sea necesario en vanilla CSS, Ej:
 
     .header{}
     .header .site-nav{}
     .header .site-nav li{}
     .header .site-nav li a{}
 
-Would be wholly unnecessary in normal CSS, so the following would be **bad**
-Sass:
+Sería totalmente innecesario en un CSS normal, de manera que lo que sigue estaría **mal**
+
+Sass/Less:
 
     .header{
         .site-nav{
@@ -730,7 +567,7 @@ Sass:
         }
     }
 
-If you were to Sass this up you’d write it as:
+Lo correcto sería escribirlo así:
 
     .header{}
     .site-nav{
