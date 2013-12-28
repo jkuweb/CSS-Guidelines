@@ -26,13 +26,13 @@ y organizar CSS.
 
 ##Contenido
 
-* [Anatomía de un documento CSS](#Anatomia-de-un-documento-CSS)
+* [Anatomía de un documento CSS](#anatom%C3%ADa-de-un-documento-css)
   * [General](#general)
-  * [Un archivo vs. varios archivos](#un-archivo-vs.-varios-archivos)
+  * [Un archivo vs. varios archivos](#un-archivo-vs-varios-archivos)
   * [Tabla de contenidos](#tabla-de-contenidos)
   * [Título de secciones](#título-de-secciones)
 * [Orden del código](#orden-del-código)
-* [Anatomía del conjunto de reglas](#anatomia-del-conjunto-de-reglas-reglas)
+* [Anatomía del conjunto de reglas](#anatom%C3%ADa-del-conjunto-de-reglas)
 * [Convenciones para los nombres](#convenciones-para-los-nombres)
   * [JS Hooks](#js-hooks)
   * [Internacionalización](#internacionalización)
@@ -53,7 +53,7 @@ y organizar CSS.
   * [Selectores sobre cualificados](#selectores-sobre-cualificados)
   * [Rendimiento de los selectores](#rendimiento-de-los-selectores)
 * [Indentación de selectores CSS](#indentación-de-los-selectores)
-* ['!important'](#!important)
+* ['!important'](#important)
 * [Números mágicos y absolutos](#numeros-mágicos-y-absolutos)
 * [Hojas de estilos condicionales](#hojas-de-estilos-condicionales)
 * [Depuración](#depuración)
