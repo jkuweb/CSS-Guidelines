@@ -119,6 +119,7 @@ Denotad una sección de la siguiente manera:
 Asignar el prefijo '$' al nombre de la sección nos permite efectuar una búsqueda ([Cmd|Ctrl]+F) por '$NOMBRE-SECCIÓN' y **limitar esa búsqueda a los títulos de sección solo**.
 
 Si trabajas con hojas de estilo muy grandes, deja cinco (5) saltos de línea entre cada sección, así:
+
     /*------------------------------------*\
         $RESET
     \*------------------------------------*/
@@ -526,8 +527,6 @@ Por ejemplo, usar '.dropdown-nav li:hover ul{ top:37px; }' para mover un despleg
 En vez deberías usar '.dropdown-nav li:hover ul{ top:100%; }' que quiere decir que no importa el alto de '.dropdown.nav', el desplegable siempre se colocará a 100% del borde superior.
 
 Piensa cada vez que escribes un número para que _encaje_ en el layout; si puedes evitarlo usando 'aliases' (Ej: 'top:100%' para indicar 'todo a partir del borde superior') o &mdash;aún mejor&mdash; sin medida alguna.
-
-Cada 
 
 Escribir medidas para que _encajen_ en el layout es un compromiso que no necesariamente querrás mantener.
 
