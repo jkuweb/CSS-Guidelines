@@ -167,7 +167,7 @@ Como lectura complementaria no podría recomendar lo suficiente el libro de Jona
 
 Tengo un gran número de estándares cuando estructuro un conjunto de reglas
 
-* Usar un guión que delimite los nombres de las clases (excepto para notaciones BEM [ver abajo](#naming-conventions))
+* Usar un guión que delimite los nombres de las clases (excepto para notaciones BEM [ver abajo](#convenciones-para-los-nombres))
 * 4 espacios de indentación.
 * Multilínea
 * Declaración en orden de relevancia (NO orden alfabético)
@@ -176,8 +176,6 @@ Tengo un gran número de estándares cuando estructuro un conjunto de reglas
 * Siempre incluir el punto y coma final en una declaración.
 
 Un ejemplo corto:
-
-A brief example:
 
     .widget{
         padding:10px;
