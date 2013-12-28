@@ -89,13 +89,14 @@ y los títulos de nuestras secciones. Si seguís leyendo lo entenderéis...
 
 Al inicio de mi hoja de estilos, mantengo una tabla de contenidos que detalla las 
 secciones mantenidas en el documento, por ejemplo:
+
     /*------------------------------------*\
-        $CONTENTS
+        $CONTENIDO
     \*------------------------------------*/
     /**
-     * CONTENTS............You’re reading it!
-     * RESET...............Set our reset defaults
-     * FONT-FACE...........Import brand font files
+     * CONTENIDO...........Lo estás leyendo!!
+     * RESET...............Establece los valores iniciales
+     * FONT-FACE...........Importamos fuentes de iconos y font-face
      */
 
 Esto dice al siguiente desarrollados(es) que tome el proyecto exactamente que
