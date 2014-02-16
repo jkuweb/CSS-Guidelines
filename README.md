@@ -196,7 +196,7 @@ Un ejemplo corto:
         }
 Aquí podemos ver que '.widget-heading' debe ser un hijo de '.widget' ya que tenemos indentado '.widget-heading' un nivel más que '.widget'. Esta información es muy útil para los desarrolladores que ahora pueden hacerse una idea del conjunto con tan solo echar un corto vistazo a las indentaciones de nuestras reglas de estilos.
 
-También podemos ver que las declaraciones de '.widget-heading' están declaradas por orden de relevancia; '.widget-heading' debe ser un elemento de texto y podemos empezar con nuestras reglas de texto, seguidas por todo las demás.
+También podemos ver que las declaraciones de '.widget-heading' están declaradas por orden de relevancia; '.widget-heading' debe ser un elemento de texto y podemos empezar con nuestras reglas de texto, seguidas por todas las demás.
 
 Una excepción a nuestra regla multi-línea sería en el siguiente caso:
 
