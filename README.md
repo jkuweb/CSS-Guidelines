@@ -322,7 +322,7 @@ comments, namely:
 
 #### Selectores Cuasi-calificados
 
-Nunca deberías clasificar tu selector, esto es, nunca debemos escribir 'ul.na{}' si podemos tener '.nav{}'. Calificar selectores disminuye el rendimiento del selector, inhibe la posibilidad de rehusar una clase en un elemento diferente y disminuye su adecuación. Estas son cosas que debemos evitar a toda costa.
+Nunca deberías clasificar tu selector, esto es, nunca debemos escribir 'ul.nav{}' si podemos tener '.nav{}'. Calificar selectores disminuye el rendimiento del selector, inhibe la posibilidad de rehusar una clase en un elemento diferente y disminuye su adecuación. Estas son cosas que debemos evitar a toda costa.
 
 Sin embargo, a veces es útil comunicar al siguiente desarrollador(es) dónde pretendes usar esa clase. Tomemos '.product-page' por ejemplo; esta clase suena como si debiera ser usada en un contenedor principal, quizás el elemento 'body' o 'html' pero es difícil de decir de verdad dónde se debe usar.
 
