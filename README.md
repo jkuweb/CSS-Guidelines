@@ -5,10 +5,12 @@
 ## Traducciones
 
 * [Russian](https://github.com/matmuchrapna/CSS-Guidelines/blob/master/README%20Russian.md)
-* [Chinese](https://github.com/chadluo/CSS-Guidelines/blob/master/README.md)
+* [Simplified Chinese](https://github.com/chadluo/CSS-Guidelines/blob/master/README.md)
+* [Traditional Chinese](https://github.com/doggy8088/CSS-Guidelines/blob/master/README.md)
 * [French](https://github.com/flexbox/CSS-Guidelines/blob/master/README.md)
 * [Japanese](https://github.com/kiwanami/CSS-Guidelines/blob/master/README.ja.md)
-* [Inglés](https://github.com/csswizardry/CSS-Guidelines/blob/master/README.md)
+* [English](https://github.com/csswizardry/CSS-Guidelines/blob/master/README.md)
+* [German](https://github.com/rnarian/CSS-Guidelines/blob/master/README.md)
 
 ---
 
@@ -214,7 +216,7 @@ Una excepción a nuestra regla multi-línea sería en el siguiente caso:
     .t80    { width:80% }
     .t90    { width:90% }
 
-En este ejemplo (del [sistema de grids de inuit.css](https://github.com/csswizardry/inuit.css/blob/master/inuit.css/partials/base/_tables.scss#L88)) tiene más sentido dejar nuestro CSS en una sola línea.
+En este ejemplo (del [sistema de grids de inuit.css](https://github.com/csswizardry/inuit.css/blob/master/base/_tables.scss#L90)) tiene más sentido dejar nuestro CSS en una sola línea.
 
 ## Convenciones para los nombres
 Mayormente utilizo clases delimitadas por guiones (Ej: '.foo-bar' y no '.foo_bar' ni '.foobar'), sin embargo, en ciertos casos uso notaciones BEM (Block Element, Modifier - elemento en bloque, modificador).
