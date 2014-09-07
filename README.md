@@ -315,8 +315,7 @@ Escribe un trozo de código y luego escribe sobre él.
 
 ### Comentarios avanzados
 
-There are a number of more advanced techniques you can employ with regards
-comments, namely:
+Hay una serie de técnicas más avanzadas que puedes usar con los comentarios como:
 
 * Selectores Cuasi-calificados
 * Código de etiquetas
